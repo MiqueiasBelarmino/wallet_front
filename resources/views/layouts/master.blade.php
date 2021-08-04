@@ -13,14 +13,12 @@
 
 <body>
 
-    @yield('sidebar')
-    <div class="container-fluid">
-        @yield('content')
-    </div>
+    @yield('content')
 
-    @yield('js')
     <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    @yield('js')
 </body>
 
 </html>

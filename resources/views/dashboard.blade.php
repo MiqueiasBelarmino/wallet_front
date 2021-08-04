@@ -3,17 +3,47 @@
 @section('title','Dashboard')
 
 @section('content')
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Wallet</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li> -->
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Conta</a></li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid">
-    <h1>Dashboard</h1>
     <div class="row">
-        <div class="col-xl-3 col-md-6 col-sm-12 m-2">
-            <div class="card card-stats">
+        <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
+            <div class="card card-stats bg-success">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Entradas</h5>
+                            <h5 class="card-title text-uppercase text-white mb-0">Receitas</h5>
                             <span class="h2 font-weight-bold mb-0">
-                                <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>&nbsp;R$&nbsp;{{$receitas['total']}}</span>
+                                <span class="text-white mr-2"><i class="fa fa-arrow-up"></i>&nbsp;R$&nbsp;{{$receitas['total']}}</span>
                             </span>
                         </div>
                         <div class="col-auto">
@@ -22,22 +52,18 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <p class="mt-3 mb-0 text-sm">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>%</span>
-                        <span class="text-nowrap">some text</span>
-                    </p> -->
                 </div>
             </div>
         </div>
 
-        <div class="col-xl-3 col-md-6 col-sm-12 m-2">
-            <div class="card card-stats">
+        <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
+            <div class="card card-stats bg-danger">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Despesas</h5>
+                            <h5 class="card-title text-uppercase text-white mb-0">Despesas</h5>
                             <span class="h2 font-weight-bold mb-0">
-                                <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i>&nbsp;R$&nbsp;{{$despesas['total']}}</span>
+                                <span class="text-white mr-2"><i class="fa fa-arrow-down"></i>&nbsp;R$&nbsp;{{$despesas['total']}}</span>
                             </span>
                         </div>
                         <div class="col-auto">
@@ -46,25 +72,21 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <p class="mt-3 mb-0 text-sm">
-                        <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i>%</span>
-                        <span class="text-nowrap">some text</span>
-                    </p> -->
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-md-6 col-sm-12 m-2">
-            <div class="card card-stats">
+        <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
+            @php
+            $balance = $receitas['total'] - $despesas['total']
+            @endphp
+            <div class="card card-stats {{$balance >0?'bg-success' : 'bg-danger'}}">
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="card-title text-uppercase text-muted mb-0">Balanço</h5>
+                            <h5 class="card-title text-uppercase text-white mb-0">Balanço</h5>
                             <span class="h2 font-weight-bold mb-0">
-                            @php
-                            $balance = $receitas['total'] - $despesas['total'] 
-                            @endphp
-                                <span class="{{$balance >0?'text-success' : 'text-danger'}} mr-2"><i class="{{$balance >0?'fa fa-arrow-up' : 'fa fa-arrow-down'}}">
-                                </i>&nbsp;R$&nbsp;{{ $balance }}</span>
+                                <span class="text-white mr-2"><i class="{{$balance >0?'fa fa-arrow-up' : 'fa fa-arrow-down'}}">
+                                    </i>&nbsp;R$&nbsp;{{ $balance }}</span>
                             </span>
                         </div>
                         <div class="col-auto">
@@ -73,14 +95,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <p class="mt-3 mb-0 text-sm">
-                        <span class="text-danger mr-2"><i class="fa fa-arrow-down"></i>%</span>
-                        <span class="text-nowrap">some text</span>
-                    </p> -->
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 @stop

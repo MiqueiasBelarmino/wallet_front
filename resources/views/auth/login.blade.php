@@ -40,12 +40,14 @@
                         <hr class="my-4">
                         <form method="POST" action="{{route('login.submit')}}">
                             @csrf
+                            <label for="email">Email</label>
                             <div class="form-floating mb-3">
-                                <label for="email">Email</label>
+                                
                                 <input value="miqueias@email.com" type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com" required>
                             </div>
+                            <label for="password">Senha</label>
+
                             <div class="form-floating mb-3">
-                                <label for="password">Senha</label>
                                 <input value="123456789" type="password" class="form-control" name="password" id="password" placeholder="Senha" required>
                             </div>
                             <!-- <div class="form-check mb-3">

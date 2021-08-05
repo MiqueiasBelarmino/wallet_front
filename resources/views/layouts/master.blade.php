@@ -10,6 +10,11 @@
     <!-- Bootstrap CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     @yield('css')
+    <style>
+        body{
+            background-color: rgb(247, 247, 247);
+        }
+    </style>
 </head>
 
 <body>

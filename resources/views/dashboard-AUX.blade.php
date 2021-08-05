@@ -1,12 +1,39 @@
-@extends('adminlte::page')
+@extends('layouts.master')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-<h1>Dashboard</h1>
-@stop
+@section('title','Dashboard')
 
 @section('content')
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Wallet</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li> -->
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Conta</a></li>
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
@@ -73,13 +100,4 @@
         </div>
     </div>
 </div>
-@stop
-
-@section('css')
-@stop
-
-@section('js')
-<script>
-    console.log('Hi!');
-</script>
 @stop

@@ -9,6 +9,56 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
+        <div class="col-12 col-sm-4 col-md-4">
+            <div class="info-box">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-arrow-up"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Receitas</span>
+                    <span class="info-box-number">R$ {{$receitas['total']}}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-12 col-sm-4 col-md-4">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-arrow-down"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Despesas</span>
+                    <span class="info-box-number">R$ {{$despesas['total']}}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        @php
+        $balance = $receitas['total'] - $despesas['total']
+        @endphp
+        <!-- fix for small devices only -->
+        <div class="clearfix hidden-md-up"></div>
+
+        <div class="col-12 col-sm-4 col-md-4">
+            <div class="info-box mb-3">
+                <span class="info-box-icon {{$balance <0?'bg-danger' : 'bg-success'}} elevation-1"><i class="fas fa-money-bill"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Balanço</span>
+                    <span class="info-box-number">R$ {{$balance}}</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+
+    <!-- <div class="row">
         <div class="col-xl-4 col-md-4 col-sm-12 mb-2">
             <div class="card card-stats bg-success">
                 <div class="card-body">
@@ -72,14 +122,11 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @stop
 
 @section('css')
 @stop
 
 @section('js')
-<script>
-    console.log('Hi!');
-</script>
 @stop

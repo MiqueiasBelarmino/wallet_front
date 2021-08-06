@@ -11,8 +11,8 @@
 <div class="container-fluid">
     <input type="hidden" name="vencto" id="vencto" value="{{(isset($vencimento) && !empty($vencimento))? $vencimento: date('Y-m-d')}}">
     <div class="row d-flex justify-content-center align-items-center">
-        <div class="col-12 col-sm-4 col-md-4">
-            <div class="date-picker">
+        <div class="col-12 col-sm-4 col-md-4 d-flex justify-content-center align-items-center">
+            <div class="date-picker d-flex justify-content-center align-items-center br-10">
                 <div class="selected-date"></div>
                 <div class="dates">
                     <div class="month">
@@ -60,7 +60,6 @@
         <div class="col-12 col-sm-4 col-md-4">
             <div class="info-box mb-3">
                 <span class="info-box-icon {{$balance <0?'bg-danger' : 'bg-success'}} elevation-1"><i class="fas fa-money-bill"></i></span>
-
                 <div class="info-box-content">
                     <span class="info-box-text">Balanço</span>
                     <span class="info-box-number">R$ {{$balance}}</span>

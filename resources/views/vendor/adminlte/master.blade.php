@@ -72,6 +72,14 @@
         <meta name="msapplication-TileImage" content="{{ asset('favicon/ms-icon-144x144.png') }}">
     @endif
 
+    <style>
+        .br-5 {border-radius: 5px !important;}
+        .br-10 {border-radius: 10px !important;}
+        .br-15 {border-radius: 15px !important;}
+        .br-20 {border-radius: 20px !important;}
+        .br-25 {border-radius: 25px !important;}
+        .br-30 {border-radius: 30px !important;}
+    </style>
 </head>
 
 <body class="@yield('classes_body')" @yield('body_data')>

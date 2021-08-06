@@ -36,7 +36,7 @@ class AuthController extends Controller
             $u->created_at = $user->created_at;
             $u->updated_at = $user->updated_at;
             Auth::login($u);
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard',['vencimento'=> date('Y-m-d')]);
         } else if ($response->object()->status && $response->object()->status == 'error') {
             return redirect()->back()->with(['error' => $response->object()->message]);
         }

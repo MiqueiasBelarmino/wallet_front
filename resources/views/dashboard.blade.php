@@ -12,7 +12,16 @@
     <input type="hidden" name="vencto" id="vencto" value="{{(isset($vencimento) && !empty($vencimento))? $vencimento: date('Y-m-d')}}">
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-12 col-sm-4 col-md-4 d-flex justify-content-center align-items-center">
-            <div class="date-picker d-flex justify-content-center align-items-center br-10">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button onclick="changeDate('p')" class="btn btn-primary" type="button"><i class="fas fa-chevron-circle-left"></i></button>
+                </div>
+                <div id='date-filter' class="form-control d-flex justify-content-center"></div>
+                <div class="input-group-append">
+                    <button onclick="changeDate('n')" class="btn btn-primary" type="button"><i class="fas fa-chevron-circle-right"></i></button>
+                </div>
+            </div>
+            <!-- <div class="date-picker d-flex justify-content-center align-items-center br-10">
                 <div class="selected-date"></div>
                 <div class="dates">
                     <div class="month">
@@ -22,7 +31,7 @@
                     </div>
                     <div class="days"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="row">
@@ -145,146 +154,49 @@
 
     @section('js')
     <script>
-        const date_picker_element = document.querySelector('.date-picker');
-        const selected_date_element = document.querySelector('.date-picker .selected-date');
-        const dates_element = document.querySelector('.date-picker .dates');
-        const mth_element = document.querySelector('.date-picker .dates .month .mth');
-        const next_mth_element = document.querySelector('.date-picker .dates .month .next-mth');
-        const prev_mth_element = document.querySelector('.date-picker .dates .month .prev-mth');
-        const days_element = document.querySelector('.date-picker .dates .days');
+        const month = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        // localStorage.setItem("currentYear", 2021);
 
-        const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        document.addEventListener('DOMContentLoaded', () => {
 
-        let date = new Date();
-        let day = date.getDate();
-        let month = date.getMonth();
-        let year = date.getFullYear();
+            if (localStorage.getItem("currentMonth") != null) currentMonth = localStorage.getItem("currentMonth");
+            if (localStorage.getItem("currentYear") != null) currentYear = localStorage.getItem("currentYear");
 
-        let selectedDate = date;
-        let selectedDay = day;
-        let selectedMonth = month;
-        let selectedYear = year;
+            document.getElementById('date-filter').innerText = `${month[currentMonth]}/${currentYear}`;
+        });
 
-        let input_date = document.getElementById("vencto");
-        let date_aux = input_date !== null ? new Date(input_date.value) : "";
-
-        mth_element.textContent = months[month] + ' ' + year;
-
-        // selected_date_element.textContent = formatDate(date, 'dmy');
-        selected_date_element.textContent = date_aux === "" ? formatDate(date, 'dmy') : formatDateAux(date_aux);
-        selected_date_element.dataset.value = date_aux === "" ? selectedDate : date_aux;
-
-        populateDates();
-
-        // EVENT LISTENERS
-        date_picker_element.addEventListener('click', toggleDatePicker);
-        next_mth_element.addEventListener('click', goToNextMonth);
-        prev_mth_element.addEventListener('click', goToPrevMonth);
-
-        // FUNCTIONS
-        function toggleDatePicker(e) {
-            if (!checkEventPathForClass(e.path, 'dates')) {
-                dates_element.classList.toggle('active');
-            }
-        }
-
-        function goToNextMonth(e) {
-            month++;
-            if (month > 11) {
-                month = 0;
-                year++;
-            }
-            mth_element.textContent = months[month] + ' ' + year;
-            populateDates();
-        }
-
-        function goToPrevMonth(e) {
-            month--;
-            if (month < 0) {
-                month = 11;
-                year--;
-            }
-            mth_element.textContent = months[month] + ' ' + year;
-            populateDates();
-        }
-
-        function populateDates(e) {
-            days_element.innerHTML = '';
-            let amount_days = 31;
-
-            if (month == 1) {
-                amount_days = 28;
-            }
-
-            for (let i = 0; i < amount_days; i++) {
-                const day_element = document.createElement('div');
-                day_element.classList.add('day');
-                day_element.textContent = i + 1;
-
-                if (selectedDay == (i + 1) && selectedYear == year && selectedMonth == month) {
-                    day_element.classList.add('selected');
+        function changeDate(order) {
+            let dateFilter = document.getElementById('date-filter')
+            if (order === 'p') {
+                if (currentMonth > 0) {
+                    currentMonth--;
+                } else {
+                    currentMonth = 11;
+                    currentYear--;
                 }
-
-                day_element.addEventListener('click', function() {
-                    selectedDate = new Date(year + '-' + (month + 1) + '-' + (i + 1));
-                    selectedDay = (i + 1);
-                    selectedMonth = month;
-                    selectedYear = year;
-
-                    selected_date_element.textContent = formatDate(selectedDate, 'dmy');
-                    selected_date_element.dataset.value = selectedDate;
-
-                    populateDates();
-                    dates_element.classList.toggle('active');
-                    window.location.href = "{{ route('dashboard') }}/?vencimento=" + formatDate(selectedDate, 'ymd');
-                });
-
-                days_element.appendChild(day_element);
-            }
-        }
-
-        // HELPER FUNCTIONS
-        function checkEventPathForClass(path, selector) {
-            for (let i = 0; i < path.length; i++) {
-                if (path[i].classList && path[i].classList.contains(selector)) {
-                    return true;
+            } else if (order === 'n') {
+                if (currentMonth < 11) {
+                    currentMonth++;
+                } else {
+                    currentMonth = 0;
+                    currentYear++;
                 }
             }
-
-            return false;
+            localStorage.setItem("currentMonth", currentMonth);
+            localStorage.setItem("currentYear", currentYear);
+            document.getElementById('date-filter').innerText = `${month[currentMonth]}/${currentYear}`;
+            // window.location.href = "{{ route('dashboard') }}/?vencimento=;
+            window.location.href = "{{ route('dashboard') }}/?vencimento=" + (currentYear + "-" + fmonth(currentMonth)) + "";
         }
 
-        function formatDate(d, f) {
-            let day = d.getDate();
-            if (day < 10) {
-                day = '0' + day;
-            }
-
-            let month = d.getMonth() + 1;
-            if (month < 10) {
-                month = '0' + month;
-            }
-
-            let year = d.getFullYear();
-            if (f == 'dmy')
-                return day + ' / ' + month + ' / ' + year;
-            else
-                return year + "-" + month + "-" + day;
-        }
-
-        function formatDateAux(d) {
-            let day = d.getDate() + 1;
-            if (day < 10) {
-                day = '0' + day;
-            }
-
-            let month = d.getMonth() + 1;
-            if (month < 10) {
-                month = '0' + month;
-            }
-
-            let year = d.getFullYear();
-            return day + ' / ' + month + ' / ' + year;
+        function fmonth(m) {
+            let a = m;
+            a++;
+            if (a < 10)
+                return "0" + a;
+            return a;
         }
     </script>
     @stop

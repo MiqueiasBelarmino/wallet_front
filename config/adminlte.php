@@ -242,28 +242,32 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
+        // ],
         ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
         [
             'text'    => 'Receitas',
             'icon'    => 'fas fa-arrow-up',
             'submenu' => [
                 [
                     'text' => 'Incluir',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Listar',
                     'url'  => '#',
                 ],
             ],
@@ -274,6 +278,10 @@ return [
             'submenu' => [
                 [
                     'text' => 'Incluir',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Listar',
                     'url'  => '#',
                 ],
             ],

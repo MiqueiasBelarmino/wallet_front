@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.template')
 
 @section('title', 'Dashboard')
 
@@ -164,6 +164,16 @@
             if (localStorage.getItem("currentMonth") != null) currentMonth = localStorage.getItem("currentMonth");
             if (localStorage.getItem("currentYear") != null) currentYear = localStorage.getItem("currentYear");
 
+            if (localStorage.getItem('visited') == '0') {
+                localStorage.setItem('visited', 1);
+                
+                currentMonth = new Date().getMonth();
+                currentYear = new Date().getFullYear();
+
+                localStorage.setItem("currentMonth", currentMonth);
+                localStorage.setItem("currentYear", currentYear);
+                // window.location.href = "{{ route('dashboard') }}/?vencimento=" + (currentYear + "-" + fmonth(currentMonth)) + "";
+            }
             document.getElementById('date-filter').innerText = `${month[currentMonth]}/${currentYear}`;
         });
 

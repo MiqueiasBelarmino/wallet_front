@@ -78,6 +78,9 @@
             </div>
         </div>
     </div>
+    <script>
+        localStorage.setItem('visited', 0);
+    </script>
 </body>
 
 </html>

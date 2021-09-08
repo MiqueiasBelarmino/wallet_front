@@ -10,7 +10,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $data = [];
-        $vencimento = date('Y-m-d');
+        $vencimento = date('Y-m');
         $input = $request->all();
         if (isset($input['vencimento']) && !empty($input['vencimento']))
         {
@@ -39,14 +39,12 @@ class DashboardController extends Controller
             }
         } else {
             $despesas['despesas'] = $response->object();
-
             $response = Http::withHeaders([
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . session('access_token')
             ])->post(env('WALLET_BASE_URL') . 'receitas', $data);
 
             $receitas['receitas'] = $response->object();
-
             $total = 0;
             if (!empty($despesas['despesas'])) {
                 foreach ($despesas['despesas'] as $desp) {
